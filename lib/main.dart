@@ -13,7 +13,8 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   int _questionIndex = 0;
-  List<Map<String, Object>> _questions = [
+
+  static const List<Map<String, Object>> _questions = const [
     {
       'question': 'Your favourite color ?',
       'answers': ['Red', 'Blue', 'White']
@@ -30,7 +31,7 @@ class MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    Map<String, Object> question = this._questions[this._questionIndex];
+    Map<String, Object> question = MyAppState._questions[this._questionIndex];
 
     return MaterialApp(
       home: Scaffold(
@@ -51,7 +52,7 @@ class MyAppState extends State<MyApp> {
 
   void answerQuestion() {
     int questionIndex = 0;
-    if (this._questionIndex <= this._questions.length - 2) {
+    if (this._questionIndex <= MyAppState._questions.length - 2) {
       questionIndex = this._questionIndex + 1;
     }
 
