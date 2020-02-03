@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './Question.dart';
 import './Answer.dart';
+import './ListFinished.dart';
 
 void main() => runApp(MyApp());
 
@@ -31,35 +32,41 @@ class MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    Map<String, Object> question = MyAppState._questions[this._questionIndex];
-
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: Text('My new Flutter'),
         ),
         body: Column(
-          children: [
-            Question(question['question']),
-            ...(question['answers'] as List<String>).map((answerText) {
-              return Answer(onAnswer: this.answerQuestion, text: answerText);
-            }).toList()
-          ],
+          children: (this._questionIndex < MyAppState._questions.length)
+              ? [
+                  Question(MyAppState._questions[this._questionIndex]['question']),
+                  ...(MyAppState._questions[this._questionIndex]['answers'] as List<String>).map((answerText) {
+                    return Answer(
+                        onAnswer: this.answerQuestion, text: answerText);
+                  }).toList()
+                ]
+              : [ListFinished(onButtonClick: this.resetQuestionsList)],
         ),
       ),
     );
   }
 
   void answerQuestion() {
-    int questionIndex = 0;
-    if (this._questionIndex <= MyAppState._questions.length - 2) {
-      questionIndex = this._questionIndex + 1;
+    if (this._questionIndex <= MyAppState._questions.length - 1) {
+      int questionIndex = this._questionIndex + 1;
+
+      setState(() {
+        this._questionIndex = questionIndex;
+      });
     }
 
-    setState(() {
-      this._questionIndex = questionIndex;
-    });
-
     print(this._questionIndex);
+  }
+
+  void resetQuestionsList() {
+    setState(() {
+      this._questionIndex = 0;
+    });
   }
 }
