@@ -7,9 +7,16 @@ class Question extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return Container(
+      child: Text(
         this.questionText,
-        style: TextStyle(),
+        style: TextStyle(
+          fontSize: 28,
+        ),
+        textAlign: TextAlign.center,
+      ),
+      width: double.infinity,
+      margin: EdgeInsets.only(bottom: 16, top: 8),
     );
   }
 }
