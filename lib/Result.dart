@@ -6,6 +6,10 @@ class ListFinished extends StatelessWidget {
 
   ListFinished({this.onButtonClick, this.totalScore});
 
+  String get resultScoreText {
+    return 'Total score is: ${this.totalScore}: Reset Game';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,7 +26,7 @@ class ListFinished extends StatelessWidget {
             margin: EdgeInsets.only(bottom: 16, top: 8),
           ),
           RaisedButton(
-            child: Text('Total score is: ${this.totalScore}: Reset Game'),
+            child: Text(resultScoreText),
             textColor: Colors.white,
             onPressed: this.onButtonClick,
             color: Colors.blue,
