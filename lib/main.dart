@@ -72,9 +72,9 @@ class MyAppState extends State<MyApp> {
   }
 
   void resetQuestionsList() {
+    this._totalScore = 0;
     setState(() {
       this._questionIndex = 0;
-      this._totalScore = 0;
     });
   }
 }
