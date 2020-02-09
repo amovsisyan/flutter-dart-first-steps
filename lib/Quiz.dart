@@ -16,9 +16,9 @@ class Quiz extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       Question(this.questions[this.questionIndex]['question']),
-      ...(this.questions[this.questionIndex]['answers'] as List<String>)
-          .map((answerText) {
-        return Answer(onAnswer: this.answerQuestion, text: answerText);
+      ...(this.questions[this.questionIndex]['answers'] as List<Map>)
+          .map((answerMap) {
+        return Answer(onAnswer: () => this.answerQuestion(answerMap['score']), text: answerMap['text']);
       }).toList()
     ]);
   }
